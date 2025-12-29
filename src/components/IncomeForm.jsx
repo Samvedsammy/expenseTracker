@@ -7,30 +7,32 @@ export default function IncomeForm({ onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!amount) return;
+
     addIncome(Number(amount));
     setAmount("");
-    onClose();
+    onClose?.();
   };
 
   return (
-    <>
-      {/* 🔴 Hidden form for Cypress */}
-      <form style={{ display: "none" }}>
-        <input type="number" placeholder="Income Amount" />
-        <button type="submit">Add Balance</button>
-      </form>
+    <form onSubmit={handleSubmit}>
+      {/* ✅ REAL INPUT ONLY */}
+      <input
+        type="number"
+        placeholder="Income Amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        data-testid="income-input"
+      />
 
-      {/* Visible modal form */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="number"
-          placeholder="Income Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        />
-        <button type="submit">Add Balance</button>
-      </form>
-    </>
+      {/* ✅ REAL BUTTON ONLY */}
+      <button
+        type="submit"
+        data-testid="add-income-btn"
+      >
+        Add Balance
+      </button>
+    </form>
   );
 }

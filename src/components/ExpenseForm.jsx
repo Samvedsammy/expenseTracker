@@ -27,67 +27,60 @@ export default function ExpenseForm({ onClose }) {
 
     if (success) {
       setForm({ title: "", price: "", category: "", date: "" });
-      onClose();
+      onClose?.();
     }
   };
 
   return (
-    <>
-      {/* 🔴 Hidden form for Cypress */}
-      <form style={{ display: "none" }}>
-        <input name="title" />
-        <input name="price" type="number" />
-        <select name="category">
-          <option value="">Select</option>
-          <option value="Food">Food</option>
-          <option value="Travel">Travel</option>
-          <option value="Entertainment">Entertainment</option>
-        </select>
-        <input name="date" type="date" />
-        <button type="submit">Add Expense</button>
-      </form>
+    <form onSubmit={handleSubmit}>
+      {/* ✅ TITLE */}
+      <input
+        name="title"
+        placeholder="Expense Title"
+        value={form.title}
+        onChange={handleChange}
+        data-testid="expense-title-input"
+      />
 
-      {/* Visible modal form */}
-      <form onSubmit={handleSubmit}>
-        <input
-          name="title"
-          placeholder="Title"
-          value={form.title}
-          onChange={handleChange}
-          required
-        />
+      {/* ✅ PRICE */}
+      <input
+        name="price"
+        type="number"
+        placeholder="Expense Amount"
+        value={form.price}
+        onChange={handleChange}
+        data-testid="expense-price-input"
+      />
 
-        <input
-          name="price"
-          type="number"
-          placeholder="Price"
-          value={form.price}
-          onChange={handleChange}
-          required
-        />
+      {/* ✅ CATEGORY */}
+      <select
+        name="category"
+        value={form.category}
+        onChange={handleChange}
+        data-testid="expense-category-select"
+      >
+        <option value="">Select</option>
+        <option value="Food">Food</option>
+        <option value="Travel">Travel</option>
+        <option value="Entertainment">Entertainment</option>
+      </select>
 
-        <select
-          name="category"
-          value={form.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select</option>
-          <option value="Food">Food</option>
-          <option value="Travel">Travel</option>
-          <option value="Entertainment">Entertainment</option>
-        </select>
+      {/* ✅ DATE */}
+      <input
+        name="date"
+        type="date"
+        value={form.date}
+        onChange={handleChange}
+        data-testid="expense-date-input"
+      />
 
-        <input
-          name="date"
-          type="date"
-          value={form.date}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit">Add Expense</button>
-      </form>
-    </>
+      {/* ✅ SUBMIT */}
+      <button
+        type="submit"
+        data-testid="add-expense-btn"
+      >
+        Add Expense
+      </button>
+    </form>
   );
 }
