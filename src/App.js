@@ -4,33 +4,41 @@ import "./App.css";
 
 import { ExpenseProvider } from "./context/ExpenseContext";
 import WalletBalance from "./components/WalletBalance";
+import ExpensesCard from "./components/ExpensesCard";
 import IncomeForm from "./components/IncomeForm";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
+import PieChartView from "./components/PieChartView";
+import BarChartView from "./components/BarChartView";
 
 Modal.setAppElement("#root");
 
-function App() {
+export default function App() {
   const [showIncomeModal, setShowIncomeModal] = useState(false);
   const [showExpenseModal, setShowExpenseModal] = useState(false);
 
   return (
     <ExpenseProvider>
-      {/* REQUIRED */}
+      {/* ✅ REQUIRED: ONLY ONE h1 */}
       <h1>Expense Tracker</h1>
 
+      {/* ================= TOP SECTION ================= */}
       <div className="top-cards">
+        {/* Wallet */}
         <WalletBalance onAddIncome={() => setShowIncomeModal(true)} />
 
-        <div className="expense-card">
-          <h2>Expenses</h2>
-          <button type="button" onClick={() => setShowExpenseModal(true)}>
-            + Add Expense
-          </button>
+        {/* Expenses */}
+        <ExpensesCard onAddExpense={() => setShowExpenseModal(true)} />
+
+        {/* Pie Chart */}
+        <div className="pie-card">
+          <PieChartView />
         </div>
       </div>
 
-      {/* MODALS */}
+      {/* ================= MODALS ================= */}
+
+      {/* Add Income Modal */}
       <Modal
         isOpen={showIncomeModal}
         onRequestClose={() => setShowIncomeModal(false)}
@@ -41,6 +49,7 @@ function App() {
         <IncomeForm onClose={() => setShowIncomeModal(false)} />
       </Modal>
 
+      {/* Add Expense Modal */}
       <Modal
         isOpen={showExpenseModal}
         onRequestClose={() => setShowExpenseModal(false)}
@@ -51,14 +60,26 @@ function App() {
         <ExpenseForm onClose={() => setShowExpenseModal(false)} />
       </Modal>
 
+      {/* ================= BOTTOM SECTION ================= */}
       <div className="bottom-section">
-        <div className="recent-card">
+
+        {/* LEFT: RECENT TRANSACTIONS */}
+        <div>
           <h3>Recent Transactions</h3>
-          <ExpenseList />
+          <div className="recent-card">
+            <ExpenseList />
+          </div>
         </div>
+
+        {/* RIGHT: TOP EXPENSES */}
+        <div>
+          <h3>Top Expenses</h3>
+          <div className="top-expense-card">
+            <BarChartView />
+          </div>
+        </div>
+
       </div>
     </ExpenseProvider>
   );
 }
-
-export default App;

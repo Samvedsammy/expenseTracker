@@ -29,7 +29,6 @@ h1 {
 /* ======================================================
    TOP SECTION (Wallet | Expenses | Pie Chart)
    ====================================================== */
-
 .top-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -123,8 +122,14 @@ button[type="submit"] {
   border-radius: 10px;
 }
 
+.top-expense-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 /* ======================================================
-   EXPENSE LIST UI
+   EXPENSE LIST
    ====================================================== */
 .expense-item {
   background-color: #ffffff;
@@ -149,9 +154,12 @@ button[type="submit"] {
   height: 36px;
   border-radius: 50%;
   background: #f1f1f1;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 18px;
   color: #555;
 }
 
@@ -176,38 +184,40 @@ button[type="submit"] {
 }
 
 /* ======================================================
-   ICON BUTTONS (FIXED & GUARANTEED)
+   ICON BUTTONS — ICON ONLY (NO BACKGROUND)
    ====================================================== */
 .icon-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+  width: 28px;
+  height: 28px;
   border: none;
+  background: transparent;
   cursor: pointer;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  color: #ffffff;       /* 🔥 CRITICAL: icon color source */
+  padding: 0;
 }
 
-.icon-btn.delete {
-  background-color: #ff4d4f;   /* red */
-}
-
+/* Pencil */
 .icon-btn.edit {
-  background-color: #f5b301;   /* golden yellow */
+  color: #f5b301;
 }
 
-/* 🔥 Force SVG size */
+/* X */
+.icon-btn.delete {
+  color: #ff4d4f;
+}
+
+/* Force SVG visibility */
 .icon-btn svg {
   width: 16px;
   height: 16px;
 }
 
 .icon-btn:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 /* ======================================================
@@ -235,7 +245,6 @@ button[type="submit"] {
    ====================================================== */
 @media (max-width: 768px) {
   .top-cards,
-  .action-section,
   .bottom-section {
     grid-template-columns: 1fr;
   }

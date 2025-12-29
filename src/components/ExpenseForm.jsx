@@ -27,13 +27,13 @@ export default function ExpenseForm({ onClose }) {
 
     if (success) {
       setForm({ title: "", price: "", category: "", date: "" });
-      onClose && onClose();
+      onClose();
     }
   };
 
   return (
     <>
-      {/* 🔴 HIDDEN BUT REQUIRED FOR CYPRESS */}
+      {/* 🔴 Hidden form for Cypress */}
       <form style={{ display: "none" }}>
         <input name="title" />
         <input name="price" type="number" />
@@ -47,7 +47,7 @@ export default function ExpenseForm({ onClose }) {
         <button type="submit">Add Expense</button>
       </form>
 
-      {/* MODAL FORM */}
+      {/* Visible modal form */}
       <form onSubmit={handleSubmit}>
         <input
           name="title"

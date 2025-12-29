@@ -9,18 +9,18 @@ export default function IncomeForm({ onClose }) {
     e.preventDefault();
     addIncome(Number(amount));
     setAmount("");
-    onClose && onClose();
+    onClose();
   };
 
   return (
     <>
-      {/* 🔴 HIDDEN BUT REQUIRED FOR CYPRESS */}
+      {/* 🔴 Hidden form for Cypress */}
       <form style={{ display: "none" }}>
         <input type="number" placeholder="Income Amount" />
         <button type="submit">Add Balance</button>
       </form>
 
-      {/* MODAL FORM */}
+      {/* Visible modal form */}
       <form onSubmit={handleSubmit}>
         <input
           type="number"
