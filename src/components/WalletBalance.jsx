@@ -6,11 +6,11 @@ export default function WalletBalance({ onAddIncome }) {
 
   return (
     <div className="wallet-card">
-      <h2>
-        Wallet Balance: <span>₹{balance.toFixed(2)}</span>
-      </h2>
+      <h2>Wallet Balance</h2>
+      <p>₹{balance.toFixed(2)}</p>
 
-      <button className="add-income-btn" onClick={onAddIncome}>
+      {/* REQUIRED BY CYPRESS */}
+      <button type="button" onClick={onAddIncome}>
         + Add Income
       </button>
     </div>
